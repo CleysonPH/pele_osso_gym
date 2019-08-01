@@ -46,3 +46,27 @@ def detalhar_instrutor(id):
     instrutor = Instrutor.query.get_or_404(id)
 
     return render_template('instrutor/detalhar_instrutor.html', titulo=titulo, instrutor=instrutor)
+
+
+@app.route('/editar/instrutor/<int:id>', methods=['GET', 'POST'])
+def editar_instrutor(id):
+    titulo = 'Editar Instrutor'
+    instrutor = Instrutor.query.get_or_404(id)
+
+    if request.method == 'GET':
+        return render_template('instrutor/formulario_instrutor.html', titulo=titulo, instrutor=instrutor)
+
+    instrutor.nome = request.form.get('nome')
+    instrutor.email = request.form.get('email')
+    instrutor.cpf = request.form.get('cpf')
+    instrutor.telefone = request.form.get('telefone')
+    instrutor.data_nascimento = request.form.get('data_nascimento')
+    instrutor.sexo = request.form.get('sexo')
+    instrutor.faculdade = request.form.get('faculdade')
+    instrutor.confef_cref = request.form.get('confef_cref')
+
+    db.session.commit()
+
+    flash('Instrutor editado com sucesso!')
+
+    return redirect(url_for('detalhar_instrutor', id=instrutor.id))
