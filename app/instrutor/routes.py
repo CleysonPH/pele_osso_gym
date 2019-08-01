@@ -9,8 +9,7 @@ def listar_instrutores():
     titulo = 'Lista de Instrutores'
     instrutores = Instrutor.query.all()
 
-    return render_template(
-        'instrutor/listar_instrutores.html', titulo=titulo, instrutores=instrutores)
+    return render_template('instrutor/listar_instrutores.html', titulo=titulo, instrutores=instrutores)
 
 
 @app.route('/cadastar/instrutor/', methods=['GET', 'POST'])
@@ -39,3 +38,11 @@ def cadastrar_instrutor():
     flash('Instrutor cadastrado com sucesso!')
 
     return redirect(url_for('cadastrar_instrutor'))
+
+
+@app.route('/detalhes/instrutor/<int:id>')
+def detalhar_instrutor(id):
+    titulo = 'Detalhes do Instrutor'
+    instrutor = Instrutor.query.get_or_404(id)
+
+    return render_template('instrutor/detalhar_instrutor.html', titulo=titulo, instrutor=instrutor)

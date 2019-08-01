@@ -57,7 +57,7 @@
                             <td>{{ instrutor.data_nascimento }}</td>
                             <td>
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                                    <button onclick="window.location='';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                    <button onclick="window.location='{{ url_for("detalhar_instrutor", id=instrutor.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                         title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
                                     <button onclick="window.location='';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                         title="Editar"><i class="fas fa-edit"></i></button>

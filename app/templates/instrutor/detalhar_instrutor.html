@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_clas %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p>Nome Completo: {{ instrutor.nome }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Endereço de Email: {{ instrutor.email }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Telefone para contato: {{ instrutor.telefone }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>CPF: {{ instrutor.cpf }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Data de Nascimento: {{ instrutor.data_nascimento }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Faculdade: {{ instrutor.faculdade }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>CONFEF | CREF: {{ instrutor.confef_cref }}</p>
+        </div>
+        <div class="col-sm-12">
+            {% if instrutor.sexo == 'M' %}
+                <p>Sexo: Masculino</p>
+            {% elif instrutor.sexo == 'F' %}
+                <p>Sexo: Feminino</p>
+            {% else %}
+                <p>Sexo: Prefere não informar</p>
+            {% endif %}
+        </div>
+        <div class="col sm-12">
+            Status: 
+            {% if instrutor.status == 'A' %}
+                <span class="badge badge-success">Ativo</span>
+            {% elif instrutor.status == 'F' %}
+                <span class="badge badge-warning">Férias</span>
+            {% else %}
+                <span class="badge badge-danger">Desligado</span>
+            {% endif %}  
+        </div>
+    </div>
+
+{% endblock %}
