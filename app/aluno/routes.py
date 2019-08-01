@@ -6,7 +6,7 @@ from app.aluno.models import Aluno
 
 @app.route('/listar/alunos/')
 def lista_alunos():
-    titulo = 'Listar Alunos'
+    titulo = 'Lista de Alunos'
     alunos = Aluno.query.all()
 
     return render_template('/aluno/lista_alunos.html', titulo=titulo, alunos=alunos)
