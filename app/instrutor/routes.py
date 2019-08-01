@@ -70,3 +70,39 @@ def editar_instrutor(id):
     flash('Instrutor editado com sucesso!')
 
     return redirect(url_for('detalhar_instrutor', id=instrutor.id))
+
+
+@app.route('/ferias/instrutor/<int:id>/')
+def ferias_instrutor(id):
+    instrutor = Instrutor.query.get_or_404(id)
+
+    if instrutor.status == 'D':
+        flash('O instrutor já está desligado.')
+    elif instrutor.status == 'A':
+        instrutor.status = 'F'
+        db.session.commit()
+        flash('Férias dadas com sucesso.')
+    else:
+        instrutor.status = 'A'
+        db.session.commit()
+        flash('Férias finalizadas com sucesso.')
+
+    return redirect(url_for('listar_instrutores'))
+
+
+@app.route('/rh/instrutor/<int:id>/')
+def rh_instrutor(id):
+    instrutor = Instrutor.query.get_or_404(id)
+
+    if instrutor.status == 'F':
+        flash('O instrutor está de férias.')
+    elif instrutor.status == 'A':
+        instrutor.status = 'D'
+        db.session.commit()
+        flash('Instrutor desligado com sucesso.')
+    else:
+        instrutor.status = 'A'
+        db.session.commit()
+        flash('Instrutor recontratado com sucesso.')
+
+    return redirect(url_for('listar_instrutores'))
