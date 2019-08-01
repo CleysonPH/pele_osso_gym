@@ -43,6 +43,16 @@
                 <p>Sexo: Prefere não informar</p>
             {% endif %}
         </div>
+        <div class="col sm-12">
+            <p>
+                Status: 
+                {% if aluno.status == 'A' %}
+                    <span class="badge badge-success">Ativa</span>
+                {% else %}
+                    <span class="badge badge-danger">Destivada</span>
+                {% endif %}
+            </p>
+        </div>
         <div class="col-sm-12">
             <p>Observações: {{ aluno.observacoes }}</p>
         </div>

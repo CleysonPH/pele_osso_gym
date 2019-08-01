@@ -44,14 +44,16 @@
             {% endif %}
         </div>
         <div class="col sm-12">
-            Status: 
-            {% if instrutor.status == 'A' %}
-                <span class="badge badge-success">Ativo</span>
-            {% elif instrutor.status == 'F' %}
-                <span class="badge badge-warning">Férias</span>
-            {% else %}
-                <span class="badge badge-danger">Desligado</span>
-            {% endif %}  
+            <p>
+                Status: 
+                {% if instrutor.status == 'A' %}
+                    <span class="badge badge-success">Ativo</span>
+                {% elif instrutor.status == 'F' %}
+                    <span class="badge badge-warning">Férias</span>
+                {% else %}
+                    <span class="badge badge-danger">Desligado</span>
+                {% endif %}  
+            </p>
         </div>
     </div>
 

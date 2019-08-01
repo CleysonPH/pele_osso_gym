@@ -28,6 +28,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Status</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
@@ -42,6 +43,13 @@
                     {% for aluno in alunos %}
                         <tr>
                             <td>{{ aluno.id }}</td>
+                            <td>
+                                {% if aluno.status == 'A' %}
+                                    <span class="badge badge-success">Ativa</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Destivada</span>
+                                {% endif %}
+                            </td>
                             <td>{{ aluno.nome }}</td>
                             <td>{{ aluno.email }}</td>
                             <td>{{ aluno.telefone }}</td>

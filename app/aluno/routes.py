@@ -30,6 +30,7 @@ def cadastrar_aluno():
         altura = request.form.get('altura'),
         sexo = request.form.get('sexo'),
         observacoes = request.form.get('observacoes'),
+        status = 'A'
     )
 
     db.session.add(aluno)
