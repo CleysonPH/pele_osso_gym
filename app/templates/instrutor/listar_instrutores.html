@@ -17,7 +17,7 @@
             <div class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Fulaninho" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Buscar</button>
-                <a class="btn btn-outline-success ml-1" href="" role="button">Novo</a>
+                <a class="btn btn-outline-success ml-1" href="{{ url_for('cadastrar_instrutor') }}" role="button">Novo</a>
             </div>
         </div>
     </div>
@@ -41,7 +41,15 @@
                     {% for instrutor in instrutores %}
                         <tr>
                             <td>{{ instrutor.id }}</td>
-                            <td><span class="badge badge-success"></span>{{ instrutor.status }}</td>
+                            <td>
+                                {% if instrutor.status == 'A' %}
+                                    <span class="badge badge-success">Ativo</span>
+                                {% elif instrutor.status == 'F' %}
+                                    <span class="badge badge-warning">Férias</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Desligado</span>
+                                {% endif %}  
+                            </td>
                             <td>{{ instrutor.nome }}</td>
                             <td>{{ instrutor.email }}</td>
                             <td>{{ instrutor.telefone }}</td>

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <form class="col-sm-12" method="POST">
+            <div class="form-group">
+                <label for="fullNameFormControl">Nome Completo *</label>
+                <input name="nome" type="text" class="form-control" id="fullNameFormControl" placeholder="Fulaninho da Silva Sauro" required value="{{ instrutor.nome or '' }}">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="emailFormControlInput">Endereço de email *</label>
+                        <input name="email" type="email" class="form-control" id="emailFormControlInput" placeholder="nome@examplo.com" required value="{{ instrutor.email or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telefoneFormControlInput">Telefone para contato *</label>
+                        <input name="telefone" type="text" class="form-control" id="telefoneFormControlInput" placeholder="(86) 9 9817-1671" required value="{{ instrutor.telefone or '' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cpfFormControlInput">CPF *</label>
+                        <input name="cpf" type="text" class="form-control" id="cpfFormControlInput" placeholder="060.964.043-25" required value="{{ instrutor.cpf or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dataNascimentoFormControlInput">Data de nascimento *</label>
+                        <input name="data_nascimento" type="text" class="form-control" id="dataNascimentoFormControlInput" placeholder="08/06/1994" required value="{{ instrutor.data_nascimento or '' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="faculdadeFormControlInput">Faculdade *</label>
+                        <input name="faculdade" type="text" class="form-control" id="faculdadeFormControlInput" placeholder="Instituto Xavier Para Jovens Super Dotados" required value="{{ instrutor.faculdade or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="confefCrefFormControlInput">CONFEF | CREF *</label>
+                        <input name="confef_cref" type="text" class="form-control" id="confefCrefFormControlInput" placeholder="968293922392" required value="{{ instrutor.confef_cref or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="sexoFormControlSelect">Sexo *</label>
+                    <select name="sexo" class="form-control" id="sexoFormControlSelect" required>
+                        <option value="F" {% if instrutor.sexo == 'F' %}selected{% endif %}>Feminino</option>
+                        <option value="M" {% if instrutor.sexo == 'M' %}selected{% endif %}>Masculino</option>
+                        <option value="X" {% if instrutor.sexo == 'X' %}selected{% endif %}>Prefere não informar</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <!-- Import plugin mask for JQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}"></script>
+
+    <script>
+        $('#cpfFormControlInput').mask('000.000.000-00', {reverse: true})
+        $('#telefoneFormControlInput').mask('(00) 0 0000-0000')
+        $('#dataNascimentoFormControlInput').mask('00/00/0000')
+
+        $('#limparCampos').click(function() {
+            $('input').val('')
+            $('textarea').val('')
+        })
+    </script>
+{% endblock %}
+
