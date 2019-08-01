@@ -37,6 +37,14 @@ def cadastrar_exercicio():
     return redirect(url_for('cadastrar_exercicio'))
 
 
+@app.route('/detalhes/exercicio/<int:id>')
+def detalhar_exercicio(id):
+    titulo = 'Detalhes do Exercicio'
+    exercicio = Exercicio.query.get_or_404(id)
+
+    return render_template('exercicio/detalhar_exercicio.html', titulo=titulo, exercicio=exercicio)
+
+
 @app.route('/editar/exercicio/<int:id>', methods=['GET', 'POST'])
 def editar_exercicio(id):
     exercicio = Exercicio.query.get_or_404(id)

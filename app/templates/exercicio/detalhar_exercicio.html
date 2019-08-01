@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_clas %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Nome do Exercicio</h4>
+            <p>{{ exercicio.nome }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Descrição</h4>
+            <p style="white-space: pre-wrap;">{{ exercicio.descricao }}</p>
+        </div>
+    </div>
+
+{% endblock %}

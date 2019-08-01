@@ -14,38 +14,9 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <p>Nome Completo: {{ instrutor.nome }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>Endereço de Email: {{ instrutor.email }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>Telefone para contato: {{ instrutor.telefone }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>CPF: {{ instrutor.cpf }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>Data de Nascimento: {{ instrutor.data_nascimento }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>Faculdade: {{ instrutor.faculdade }}</p>
-        </div>
-        <div class="col-sm-12">
-            <p>CONFEF | CREF: {{ instrutor.confef_cref }}</p>
-        </div>
-        <div class="col-sm-12">
-            {% if instrutor.sexo == 'M' %}
-                <p>Sexo: Masculino</p>
-            {% elif instrutor.sexo == 'F' %}
-                <p>Sexo: Feminino</p>
-            {% else %}
-                <p>Sexo: Prefere não informar</p>
-            {% endif %}
-        </div>
-        <div class="col sm-12">
+            <h4>Nome Completo</h4>
             <p>
-                Status: 
+                {{ instrutor.nome }}
                 {% if instrutor.status == 'A' %}
                     <span class="badge badge-success">Ativo</span>
                 {% elif instrutor.status == 'F' %}
@@ -53,6 +24,42 @@
                 {% else %}
                     <span class="badge badge-danger">Desligado</span>
                 {% endif %}  
+            </p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Endereço de Email</h4>
+            <p>{{ instrutor.email }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Telefone para contato</h4>
+            <p>{{ instrutor.telefone }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>CPF</h4>
+            <p>{{ instrutor.cpf }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Data de Nascimento</h4>
+            <p>{{ instrutor.data_nascimento }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Faculdade</h4>
+            <p>{{ instrutor.faculdade }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>CONFEF | CREF</h4>
+            <p>{{ instrutor.confef_cref }}</p>
+        </div>
+        <div class="col-sm-12">
+            <h4>Sexo</h4>
+            <p>
+                {% if instrutor.sexo == 'M' %}
+                    Masculino
+                {% elif instrutor.sexo == 'F' %}
+                    Feminino
+                {% else %}
+                    Prefere não informar
+                {% endif %}
             </p>
         </div>
     </div>
