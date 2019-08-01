@@ -35,3 +35,21 @@ def cadastrar_exercicio():
     flash('Exercicio cadastrado com sucesso!')
 
     return redirect(url_for('cadastrar_exercicio'))
+
+
+@app.route('/editar/exercicio/<int:id>', methods=['GET', 'POST'])
+def editar_exercicio(id):
+    exercicio = Exercicio.query.get_or_404(id)
+    titulo = 'Editar Exercicio'
+
+    if request.method == 'GET':
+        return render_template('exercicio/formulario_exercicio.html', titulo=titulo, exercicio=exercicio)
+    
+    exercicio.nome = request.form.get('nome')
+    exercicio.descricao = request.form.get('descricao')
+
+    db.session.commit()
+
+    flash('Exercicio cadastrado com sucesso!')
+
+    return redirect(url_for('listar_exercicios'))
