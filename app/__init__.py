@@ -12,3 +12,5 @@ from app.aluno import routes
 from app.aluno import models
 from app.instrutor import routes
 from app.instrutor import models
+from app.exercicio import routes
+from app.exercicio import models
