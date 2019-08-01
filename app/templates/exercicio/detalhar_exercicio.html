@@ -15,7 +15,16 @@
     <div class="row">
         <div class="col-sm-12">
             <h4>Nome do Exercicio</h4>
-            <p>{{ exercicio.nome }}</p>
+            <p>
+                {{ exercicio.nome }}
+                {% if exercicio.status == 'A' %}
+                    <span class="badge badge-success">Ativo</span>
+                {% elif instrutor.status == 'M' %}
+                    <span class="badge badge-warning">Manutenção</span>
+                {% else %}
+                    <span class="badge badge-danger">Inativo</span>
+                {% endif %}
+            </p>
         </div>
         <div class="col-sm-12">
             <h4>Descrição</h4>

@@ -75,3 +75,19 @@ def editar_aluno(id):
     flash('Aluno editado com sucesso!')
 
     return redirect(url_for('detalhar_aluno', id=aluno.id))
+
+
+@app.route('/status/aluno/<int:id>')
+def status_aluno(id):
+    aluno = Aluno.query.get_or_404(id)
+
+    if aluno.status == 'A':
+        aluno.status = 'T'
+        db.session.commit()
+        flash('Matricula trancada com sucesso!')
+    else:
+        aluno.status = 'A'
+        db.session.commit()
+        flash('Matricula destrancada com sucesso!')
+
+    return redirect(url_for('lista_alunos'))

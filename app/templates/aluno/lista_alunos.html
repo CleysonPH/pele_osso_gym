@@ -47,7 +47,7 @@
                                 {% if aluno.status == 'A' %}
                                     <span class="badge badge-success">Ativa</span>
                                 {% else %}
-                                    <span class="badge badge-danger">Destivada</span>
+                                    <span class="badge badge-danger">Trancada</span>
                                 {% endif %}
                             </td>
                             <td>{{ aluno.nome }}</td>
@@ -63,6 +63,15 @@
                                         title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
                                     <button onclick="window.location='{{ url_for("editar_aluno", id=aluno.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                         title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button onclick="window.location='{{ url_for("status_aluno", id=aluno.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="{% if aluno.status == 'A' %} Trancar Matricula {% else %} Destrancar Matricula {% endif %}
+                                        ">
+                                        {% if aluno.status == 'A' %}
+                                            <i class="fas fa-lock"></i>
+                                        {% else %}
+                                            <i class="fas fa-lock-open"></i>
+                                        {% endif %}
+                                    </button>
                                 </div>
                             </td>
                         </tr>
