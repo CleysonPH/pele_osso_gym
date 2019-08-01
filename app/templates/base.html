@@ -39,7 +39,25 @@
                             <i class="fas fa-plus"></i> Cadastrar
                         </a>
                         <div class="dropdown-menu" aria-labelledby="cadastroDropdown">
-                            <a class="dropdown-item" href="cadastro/aluno.html">
+                            <a class="dropdown-item" href="{{ url_for('cadastrar_aluno') }}">
+                                <i class="fas fa-graduation-cap"></i> Aluno
+                            </a>
+                            <a class="dropdown-item" href="cadastro/professor.html">
+                                <i class="fas fa-chalkboard-teacher"></i> Professor
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="cadastro/exercicio.html">
+                                <i class="fas fa-dumbbell"></i> Exercício
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="cadastroDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-clipboard-list"></i> Listar
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="cadastroDropdown">
+                            <a class="dropdown-item" href="{{ url_for('lista_alunos') }}">
                                 <i class="fas fa-graduation-cap"></i> Aluno
                             </a>
                             <a class="dropdown-item" href="cadastro/professor.html">
@@ -94,7 +112,7 @@
     </nav>
     <!-- NavBar ends -->
 
-    <main class="container-fluid">
+    <main class="{% block main_class %}container-fluid{% endblock %}">
         {% block content %}
         
         {% endblock %}
@@ -166,12 +184,16 @@
     
 
     <!-- Import JQuery JS -->
-    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}'"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
     <!-- Import Popper Js  -->
-    <script src="{{ url_for('static', filename='js/popper-1.14.7.min.js') }}'"></script>
+    <script src="{{ url_for('static', filename='js/popper-1.14.7.min.js') }}"></script>
     <!-- Import Bootstrap Js -->
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}'"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
+
+    {% block script %}
+    
+    {% endblock %}
 </body>
 </html>
