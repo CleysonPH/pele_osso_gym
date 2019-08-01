@@ -4,17 +4,20 @@ from app import app, db
 from app.aluno.models import Aluno
 
 
-@app.route('/alunos/listar/')
+@app.route('/listar/alunos/')
 def lista_alunos():
+    titulo = 'Listar Alunos'
     alunos = Aluno.query.all()
 
-    return render_template('/aluno/lista_alunos.html', alunos=alunos)
+    return render_template('/aluno/lista_alunos.html', titulo=titulo, alunos=alunos)
 
 
-@app.route('/aluno/cadastrar/', methods=['GET', 'POST'])
+@app.route('/cadastrar/aluno/', methods=['GET', 'POST'])
 def cadastrar_aluno():
+    titulo = 'Cadastrar Aluno'
+
     if request.method == 'GET':
-        return render_template('/aluno/cadastar_aluno.html')
+        return render_template('/aluno/cadastar_aluno.html', titulo=titulo)
     
     aluno = Aluno(
         nome = request.form.get('nome'),
@@ -34,3 +37,11 @@ def cadastrar_aluno():
     flash('Aluno cadastrado com sucesso!')
 
     return redirect(url_for('cadastrar_aluno'))
+
+
+@app.route('/detalhes/aluno/<int:id>')
+def detalhar_aluno(id):
+    aluno = Aluno.query.get_or_404(id)
+    titulo = 'Detalhes do Aluno'
+
+    return render_template('/aluno/detalhar_aluno.html', titulo=titulo, aluno=aluno)

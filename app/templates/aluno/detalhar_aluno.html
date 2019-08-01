@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_clas %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p>Nome Completo: {{ aluno.nome }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Endereço de Email: {{ aluno.email }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Telefone para contato: {{ aluno.telefone }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>CPF: {{ aluno.cpf }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Data de Nascimento: {{ aluno.data_nascimento }}</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Peso: {{ aluno.peso }} Kg</p>
+        </div>
+        <div class="col-sm-12">
+            <p>Altura: {{ aluno.altura }} m</p>
+        </div>
+        <div class="col-sm-12">
+            {% if aluno.sexo == 'M' %}
+                <p>Sexo: Masculino</p>
+            {% elif aluno.sexo == 'F' %}
+                <p>Sexo: Feminino</p>
+            {% else %}
+                <p>Sexo: Prefere não informar</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-12">
+            <p>Observações: {{ aluno.observacoes }}</p>
+        </div>
+    </div>
+
+{% endblock %}
