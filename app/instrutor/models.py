@@ -1,34 +1,32 @@
 from app import db
 
 
-class Aluno(db.Model):
+class Instrutor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     cpf = db.Column(db.String(14), nullable=False)
     telefone = db.Column(db.String(15), nullable=False)
     data_nascimento = db.Column(db.String(10), nullable=False)
-    peso = db.Column(db.Float, nullable=True)
-    altura = db.Column(db.Float, nullable=True)
     sexo = db.Column(db.String(1), nullable=False)
-    observacoes = db.Column(db.Text, nullable=True)
+    faculdade = db.Column(db.String(80), nullable=False)
+    confef_cref = db.Column(db.String(20), nullable=False)
     status = db.Column(db.String(1), nullable=False)
 
 
     def __init__(
             self, nome, email, cpf, telefone, data_nascimento,
-            peso, altura, sexo, observacoes, status):
+            sexo, faculdade, confef_cref, status):
         self.nome = nome
         self.email = email
         self.cpf = cpf
         self.telefone = telefone
         self.data_nascimento = data_nascimento
-        self.peso = peso or None
-        self.altura = altura or None
         self.sexo = sexo
-        self.observacoes = observacoes or None
+        self.faculdade = faculdade
+        self.confef_cref = confef_cref
         self.status = status
 
 
     def __repr__(self):
-        return f'<Aluno {self.nome}>'
+        return f'<Instrutor {self.nome}>'
