@@ -7,7 +7,10 @@ from app.aluno.models import Aluno
 @app.route('/listar/alunos/')
 def lista_alunos():
     titulo = 'Lista de Alunos'
-    alunos = Aluno.query.all()
+
+    busca = request.args.get('q', '')
+
+    alunos = Aluno.query.filter(Aluno.nome.contains(busca)).all()
 
     return render_template('/aluno/lista_alunos.html', titulo=titulo, alunos=alunos)
 

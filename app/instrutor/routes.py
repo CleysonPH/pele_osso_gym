@@ -7,7 +7,10 @@ from app.instrutor.models import Instrutor
 @app.route('/listar/instrutor/')
 def listar_instrutores():
     titulo = 'Lista de Instrutores'
-    instrutores = Instrutor.query.all()
+
+    busca = request.args.get('q', '')
+
+    instrutores = Instrutor.query.filter(Instrutor.nome.contains(busca)).all()
 
     return render_template('instrutor/listar_instrutores.html', titulo=titulo, instrutores=instrutores)
 
