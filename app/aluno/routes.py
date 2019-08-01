@@ -14,10 +14,11 @@ def lista_alunos():
 
 @app.route('/cadastrar/aluno/', methods=['GET', 'POST'])
 def cadastrar_aluno():
+    aluno = None
     titulo = 'Cadastrar Aluno'
 
     if request.method == 'GET':
-        return render_template('/aluno/cadastar_aluno.html', titulo=titulo)
+        return render_template('/aluno/formulario_aluno.html', titulo=titulo, aluno=aluno)
     
     aluno = Aluno(
         nome = request.form.get('nome'),
@@ -39,9 +40,34 @@ def cadastrar_aluno():
     return redirect(url_for('cadastrar_aluno'))
 
 
-@app.route('/detalhes/aluno/<int:id>')
+@app.route('/detalhes/aluno/<int:id>/')
 def detalhar_aluno(id):
     aluno = Aluno.query.get_or_404(id)
     titulo = 'Detalhes do Aluno'
 
     return render_template('/aluno/detalhar_aluno.html', titulo=titulo, aluno=aluno)
+
+
+@app.route('/editar/aluno/<int:id>/', methods=['GET', 'POST'])
+def editar_aluno(id):
+    aluno = Aluno.query.get_or_404(id)
+    titulo = 'Editar Aluno'
+
+    if request.method == 'GET':
+        return render_template('/aluno/formulario_aluno.html', titulo=titulo, aluno=aluno)
+    
+    aluno.nome = request.form.get('nome')
+    aluno.email = request.form.get('email')
+    aluno.cpf = request.form.get('cpf')
+    aluno.telefone = request.form.get('telefone')
+    aluno.data_nascimento = request.form.get('data_nascimento')
+    aluno.peso = request.form.get('peso')
+    aluno.altura = request.form.get('altura')
+    aluno.sexo = request.form.get('sexo')
+    aluno.observacoes = request.form.get('observacoes')
+
+    db.session.commit()
+
+    flash('Aluno editado com sucesso!')
+
+    return redirect(url_for('detalhar_aluno', id=aluno.id))
