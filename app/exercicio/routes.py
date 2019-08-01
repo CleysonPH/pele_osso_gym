@@ -1,6 +1,6 @@
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
 
-from app import app
+from app import app, db
 from app.exercicio.models import Exercicio
 
 
@@ -23,4 +23,15 @@ def cadastrar_exercicio():
     if request.method == 'GET':
         return render_template('exercicio/formulario_exercicio.html', titulo=titulo, exercicio=exercicio)
 
-    
+    exercicio = Exercicio(
+        nome = request.form.get('nome'),
+        descricao = request.form.get('descricao'),
+        status = 'A',
+    )
+
+    db.session.add(exercicio)
+    db.session.commit()
+
+    flash('Exercicio cadastrado com sucesso!')
+
+    return redirect(url_for('cadastrar_exercicio'))

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <form class="col-sm-12" method="POST">
+            <div class="form-group">
+                <label for="nameFormControl">Nome do Exercício *</label>
+                <input name="nome" type="text" class="form-control" id="nameFormControl" placeholder="Cadeira Extensora" required value="{{ exercicio.nome or '' }}">
+            </div>
+            <div class="form-group mt-3">
+                <label for="descricaoFormControlTextarea">Descrição *</label>
+                <textarea name="descricao" class="form-control" id="descricaoFormControlTextarea" rows="3" required>{{ exercicio.descricao or '' }}</textarea>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
+        </form>
+    </div>
+
+{% endblock %}
+

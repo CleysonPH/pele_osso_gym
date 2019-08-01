@@ -17,7 +17,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <input name='q' class="form-control mr-sm-2" type="search" placeholder="Fulaninho" aria-label="Search", value="{{ request.args.get('q', '') }}">
                 <button class="btn btn-outline-primary" type="submit">Buscar</button>
-                <a class="btn btn-outline-success ml-1" href="" role="button">Novo</a>
+                <a class="btn btn-outline-success ml-1" href="{{ url_for('cadastrar_exercicio') }}" role="button">Novo</a>
             </form>
         </div>
     </div>
