@@ -14,3 +14,5 @@ from app.instrutor import routes
 from app.instrutor import models
 from app.exercicio import routes
 from app.exercicio import models
+from app.ficha import models
+from app.ficha import routes
