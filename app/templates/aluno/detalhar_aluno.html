@@ -24,31 +24,39 @@
                 {% endif %}
             </p>
         </div>
-        <div class="col-sm-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             <h4>Endereço de Email</h4>
             <p>{{ aluno.email }}</p>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h4>Telefone para contato</h4>
             <p>{{ aluno.telefone }}</p>
         </div>
-        <div class="col-sm-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             <h4>CPF</h4>
             <p>{{ aluno.cpf }}</p>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h4>Data de Nascimento</h4>
             <p>{{ aluno.data_nascimento }}</p>
         </div>
-        <div class="col-sm-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             <h4>Peso</h4>
             <p>{{ aluno.peso }} Kg</p>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h4>Altura</h4>
             <p>{{ aluno.altura }} m</p>
         </div>
-        <div class="col-sm-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
             <h4>Sexo</h4>
             <p>
                 {% if aluno.sexo == 'M' %}
@@ -60,10 +68,11 @@
                 {% endif %}
             </p>
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-12">
             <h4>Observações</h4>
             <p>{{ aluno.observacoes or '' }}</p>
         </div>
     </div>
-
 {% endblock %}
