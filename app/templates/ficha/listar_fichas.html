@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="form-inline my-2 my-lg-0">
+                <input name='q' class="form-control mr-sm-2" type="search" placeholder="Fulaninho" aria-label="Search", value="{{ request.args.get('q', '') }}">
+                <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                <a class="btn btn-outline-success ml-1" href="" role="button">Novo</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col sm-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Status</th>
+                        <th>Nome</th>
+                        <th>Instrutor</th>
+                        <th>Aluno</th>
+                        <th>Data Inicio</th>
+                        <th>Data Fim</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ficha in fichas %}
+                        <tr>
+                            <td>{{ ficha.id }}</td>
+                            <td>
+                                {% if ficha.status == 'C' %}
+                                    <span class="badge badge-success">Concluida</span>
+                                {% elif ficha.status == 'A' %}
+                                    <span class="badge badge-warning">Ativa</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Suspensa</span>
+                                {% endif %}  
+                            </td>
+                            <td>{{ ficha.nome }}</td>
+                            <td>{{ ficha.instrutor.nome }}</td>
+                            <td>{{ ficha.aluno.nome }}</td>
+                            <td>{{ ficha.data_inicio }}</td>
+                            <td>{{ ficha.data_fim }}</td>
+                            <td>
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button onclick="window.location='';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
+                                    <button onclick="window.location='';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="Editar"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('[data-toggle="tooltip"]').tooltip()
+    </script>
+{% endblock %}
