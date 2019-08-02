@@ -58,6 +58,6 @@ def editar_exercicio(id):
 
     db.session.commit()
 
-    flash('Exercicio cadastrado com sucesso!')
+    flash('Exercicio editado com sucesso!')
 
     return redirect(url_for('listar_exercicios'))
