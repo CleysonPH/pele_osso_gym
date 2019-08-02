@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <form class="col-sm-12" method="POST">
+            <div class="form-group">
+                <label for="nameFormControl">Nome da Ficha *</label>
+                <input name="nome" type="text" class="form-control" id="nameFormControl" placeholder="Treino Vem Monstro" required value="{{ ficha.nome or '' }}">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="instrutorFormControlInput">Instrutor *</label>
+                        <select name="instrutor" id="instrutorFormControlInput" class="form-control">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            {% for instrutor in instrutores %}
+                                <option value="{{ instrutor.id }}">{{ instrutor.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="alunoFormControlInput">Aluno *</label>
+                        <select name="aluno" id="alunoFormControlInput" class="form-control">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            {% for aluno in alunos %}
+                                <option value="{{ aluno.id }}">{{ aluno.nome }}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dataInicioFormControlInput">Data de Inicio *</label>
+                        <input name="data_inicio" type="text" class="form-control" id="dataInicioFormControlInput" placeholder="10/01/2019" required value="{{ ficha.data_inicio or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dataFimFormControlInput">Data de Finalização *</label>
+                        <input name="data_fim" type="text" class="form-control" id="dataFimFormControlInput" placeholder="10/02/2019" required value="{{ ficha.data_fim or '' }}">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <!-- Import plugin mask for JQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}"></script>
+
+    <script>
+        $('#dataInicioFormControlInput').mask('00/00/0000')
+        $('#dataFimFormControlInput').mask('00/00/0000')
+
+        $('#limparCampos').click(function() {
+            $('input').val('')
+            $('textarea').val('')
+        })
+    </script>
+{% endblock %}
+
