@@ -61,3 +61,35 @@ def editar_exercicio(id):
     flash('Exercicio editado com sucesso!')
 
     return redirect(url_for('listar_exercicios'))
+
+
+@app.route('/manutencao/exercicio/<int:id>')
+def manutencao_exercicio(id):
+    exercicio = Exercicio.query.get_or_404(id)
+
+    if exercicio.status in 'AI' :
+        exercicio.status = 'M'
+        db.session.commit()
+        flash('Exercicio colocado em manutenção com sucesso!')
+    else:
+        exercicio.status = 'A'
+        db.session.commit()
+        flash('Exercicio retirado da manutenção com sucesso!')
+
+    return redirect(url_for('listar_exercicios'))
+
+
+@app.route('/controlar/status/exercicio/<int:id>')
+def desativar_reativar_exercicio(id):
+    exercicio = Exercicio.query.get_or_404(id)
+
+    if exercicio.status in 'AM' :
+        exercicio.status = 'I'
+        db.session.commit()
+        flash('Exercicio desativado com sucesso!')
+    else:
+        exercicio.status = 'A'
+        db.session.commit()
+        flash('Exercicio reativado com sucesso!')
+
+    return redirect(url_for('listar_exercicios'))

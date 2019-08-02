@@ -53,6 +53,19 @@
                                         title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
                                     <button onclick="window.location='{{ url_for("editar_exercicio", id=exercicio.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                         title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button onclick="window.location='{{ url_for("manutencao_exercicio", id=exercicio.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="{% if exercicio.status in 'AI' %} Iniciar manutenção {% else %} Finalizar manutenção {% endif %}
+                                        ">
+                                        <i class="fas fa-tools"></i>
+                                    </button>
+                                    <button onclick="window.location='{{ url_for("desativar_reativar_exercicio", id=exercicio.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="{% if exercicio.status in 'AM' %} Desativar exercicio {% else %} Reativar exercicio {% endif %}">
+                                        {% if exercicio.status in 'AM' %}
+                                            <i class="far fa-times-circle"></i>
+                                        {% else %}
+                                            <i class="fas fa-undo"></i>
+                                        {% endif %}
+                                    </button>
                                 </div>
                             </td>
                         </tr>
