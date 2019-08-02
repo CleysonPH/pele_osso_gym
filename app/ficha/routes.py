@@ -56,3 +56,32 @@ def detalhar_ficha(id):
     titulo = 'Detalhes da Ficha'
 
     return render_template('ficha/detalhar_ficha.html', titulo=titulo, ficha=ficha)
+
+
+@app.route('/editar/ficha/<int:id>/', methods=['GET', 'POST'])
+def editar_ficha(id):
+    titulo = 'Editar Ficha'
+    ficha = Ficha.query.get_or_404(id)
+    instrutores = Instrutor.query.filter(Instrutor.status == 'A')
+    alunos = Aluno.query.filter(Aluno.status == 'A')
+
+    if request.method == 'GET':
+        return render_template(
+            'ficha/formulario_ficha.html',
+            titulo=titulo,
+            ficha=ficha,
+            instrutores=instrutores,
+            alunos=alunos
+        )
+
+    ficha.nome = request.form.get('nome')
+    ficha.instrutor = Instrutor.query.get(request.form.get('instrutor'))
+    ficha.aluno = Aluno.query.get(request.form.get('aluno'))
+    ficha.data_inicio = get_date_from_string(request.form.get('data_inicio'))
+    ficha.data_fim = get_date_from_string(request.form.get('data_fim'))
+
+    db.session.commit()
+
+    flash('Ficha editada com sucesso!')
+
+    return redirect(url_for('listar_fichas'))
