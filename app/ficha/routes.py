@@ -48,3 +48,11 @@ def cadastrar_ficha():
     flash('Ficha cadastrada com sucesso!')    
 
     return redirect(url_for('listar_fichas'))
+
+
+@app.route('/detalhar/ficha/<int:id>/')
+def detalhar_ficha(id):
+    ficha = Ficha.query.get_or_404(id)
+    titulo = 'Detalhes da Ficha'
+
+    return render_template('ficha/detalhar_ficha.html', titulo=titulo, ficha=ficha)

@@ -19,7 +19,7 @@
                 {{ exercicio.nome }}
                 {% if exercicio.status == 'A' %}
                     <span class="badge badge-success">Ativo</span>
-                {% elif instrutor.status == 'M' %}
+                {% elif exercicio.status == 'M' %}
                     <span class="badge badge-warning">Manutenção</span>
                 {% else %}
                     <span class="badge badge-danger">Inativo</span>

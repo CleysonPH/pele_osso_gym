@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_clas %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Nome da Ficha</h4>
+            <p>
+                {{ ficha.nome }}
+                {% if ficha.status == 'C' %}
+                    <span class="badge badge-success">Concluida</span>
+                {% elif ficha.status == 'A' %}
+                    <span class="badge badge-warning">Ativa</span>
+                {% else %}
+                    <span class="badge badge-danger">Suspensa</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Instrutor</h4>
+            <p>{{ ficha.instrutor.nome }}</p>
+        </div>
+        <div class="col-sm-6">
+            <h4>Aluno</h4>
+            <p>{{ ficha.aluno.nome }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Data de Inicio</h4>
+            <p>{{ ficha.data_inicio }}</p>
+        </div>
+        <div class="col-sm-6">
+            <h4>Data de Finalização</h4>
+            <p>{{ ficha.data_fim }}</p>
+        </div>
+    </div>
+
+{% endblock %}
