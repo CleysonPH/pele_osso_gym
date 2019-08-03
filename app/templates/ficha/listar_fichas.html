@@ -61,6 +61,22 @@
                                         title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
                                     <button onclick="window.location='{{ url_for("editar_ficha", id=ficha.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                         title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button onclick="window.location='{{ url_for("conclusao_ficha", id=ficha.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="{% if ficha.status in 'AS' %} Concluir Ficha {% else %} Reativar Ficha {% endif %}" {% if ficha.status == 'S' %} disabled {% endif %} >
+                                        {% if ficha.status in 'AS' %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-undo"></i>
+                                        {% endif %}
+                                    </button>
+                                    <button onclick="window.location='{{ url_for("suspensao_ficha", id=ficha.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="{% if ficha.status in 'AC' %} Suspender Ficha {% else %} Reativar Ficha {% endif %}" {% if ficha.status == 'C' %} disabled {% endif %} >
+                                        {% if ficha.status in 'AC' %}
+                                            <i class="far fa-times-circle"></i>
+                                        {% else %}
+                                            <i class="fas fa-undo"></i>
+                                        {% endif %}
+                                    </button>
                                 </div>
                             </td>
                         </tr>

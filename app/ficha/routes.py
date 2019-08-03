@@ -85,3 +85,41 @@ def editar_ficha(id):
     flash('Ficha editada com sucesso!')
 
     return redirect(url_for('listar_fichas'))
+
+
+@app.route('/conclusao/ficha/<int:id>/')
+def conclusao_ficha(id):
+    ficha = Ficha.query.get_or_404(id)
+
+    if ficha.status == 'A':
+        ficha.status = 'C'
+        db.session.commit()
+        flash('Ficha concluida com sucesso!')
+    elif ficha.status == 'C':
+        ficha.status = 'A'
+        db.session.commit()
+        flash('Ficha reativada com sucesso!')
+    else:
+        flash('A ficha está com o status suspenso!')
+
+
+    return redirect(url_for('listar_fichas'))
+
+
+@app.route('/suspensao/ficha/<int:id>/')
+def suspensao_ficha(id):
+    ficha = Ficha.query.get_or_404(id)
+
+    if ficha.status == 'A':
+        ficha.status = 'S'
+        db.session.commit()
+        flash('Ficha suspensa com sucesso!')
+    elif ficha.status == 'S':
+        ficha.status = 'A'
+        db.session.commit()
+        flash('Ficha reativada com sucesso!')
+    else:
+        flash('A ficha está com o status concluido!')
+
+
+    return redirect(url_for('listar_fichas'))
