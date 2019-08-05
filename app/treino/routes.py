@@ -56,3 +56,16 @@ def editar_treino(id):
     flash('Treino editado com sucesso!')
 
     return redirect(url_for('detalhar_ficha', id=treino.ficha.id))
+
+
+@app.route('/apagar/treino/<int:id>')
+def apagar_treino(id):
+    treino = Treino.query.get_or_404(id)
+    ficha_id = treino.ficha.id
+
+    db.session.delete(treino)
+    db.session.commit()
+
+    flash('Treino deletado com sucesso!')
+
+    return redirect(url_for('detalhar_ficha', id=ficha_id))
