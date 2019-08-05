@@ -16,3 +16,5 @@ from app.exercicio import routes
 from app.exercicio import models
 from app.ficha import models
 from app.ficha import routes
+from app.treino import models
+from app.treino import routes

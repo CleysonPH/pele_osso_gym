@@ -214,6 +214,9 @@ dmypy.json
 # Ignore all local history of files
 .history
 
-modelo.txt
+modelo.*
+
+out/
+
 
 # End of https://www.gitignore.io/api/git,flask,python,visualstudiocode
