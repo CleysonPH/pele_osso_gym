@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom mt-2 mb-4">
+            <h1>{{ titulo }}</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <form class="col-sm-12" method="POST">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="exercicioFormControlInput">Exercicio *</label>
+                        <select name="exercicio" id="exercicioFormControlInput" class="form-control">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            {% for exercicio in exercicios %}
+                                <option value="{{ exercicio.id }}" {% if treino and treino.exercicio.id == exercicio.id %} selected {% endif %} >
+                                    {{ exercicio.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="cargaFormControlInput">Carga</label>
+                        <div class="input-group">
+                            <input name="carga" type="number" class="form-control" id="cargaFormControlInput" placeholder="50" step="0.5" required value="{{ treino.carga or '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Kg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="repeticaoFormControlInput">Repetição</label>
+                        <input name="repeticao" type="number" class="form-control" id="repeticaoFormControlInput" placeholder="15" step="1" required value="{{ treino.repeticao or '' }}">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="secaoFormControlInput">Seções</label>
+                        <input name="secao" type="number" class="form-control" id="secaoFormControlInput" placeholder="3" step="1" required value="{{ treino.secao or '' }}">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="descansoFormControlInput">Descanso</label>
+                        <div class="input-group">
+                            <input name="descanso" type="number" class="form-control" id="descansoFormControlInput" placeholder="45" step="1" required value="{{ treino.descanso or '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">seg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        $('#limparCampos').click(function() {
+            $('input').val('')
+            $('textarea').val('')
+        })
+    </script>
+{% endblock %}
+

@@ -48,4 +48,50 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>
+                Treinos
+                {% if ficha.status == 'A' %}
+                    <a class="btn btn-outline-primary ml-1" href="{{ url_for('cadastrar_treino', id=ficha.id) }}" role="button">Adicionar Treio</a>
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Exercicio</th>
+                            <th>Carga</th>
+                            <th>Repetição</th>
+                            <th>Seções</th>
+                            <th>Descanso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for treino in ficha.treinos %}
+                            <tr>
+                                <td>{{ treino.id }}</td>
+                                <td>{{ treino.exercicio.nome }}</td>
+                                <td>{{ treino.carga }} Kg</td>
+                                <td>{{ treino.repeticao }}</td>
+                                <td>{{ treino.secao }}</td>
+                                <td>{{ treino.descanso }}</td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
