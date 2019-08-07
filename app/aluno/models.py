@@ -7,7 +7,7 @@ class Aluno(db.Model):
     email = db.Column(db.String(120), nullable=False)
     cpf = db.Column(db.String(14), nullable=False)
     telefone = db.Column(db.String(15), nullable=False)
-    data_nascimento = db.Column(db.String(10), nullable=False)
+    data_nascimento = db.Column(db.Date, nullable=False)
     peso = db.Column(db.Float, nullable=True)
     altura = db.Column(db.Float, nullable=True)
     sexo = db.Column(db.String(1), nullable=False)
@@ -16,18 +16,18 @@ class Aluno(db.Model):
 
 
     def __init__(
-            self, nome, email, cpf, telefone, data_nascimento,
-            peso, altura, sexo, observacoes, status):
+            self, nome=None, email=None, cpf=None, telefone=None, data_nascimento=None,
+            peso=None, altura=None, sexo=None, observacoes=None):
         self.nome = nome
         self.email = email
         self.cpf = cpf
         self.telefone = telefone
         self.data_nascimento = data_nascimento
-        self.peso = peso or None
-        self.altura = altura or None
+        self.peso = peso
+        self.altura = altura
         self.sexo = sexo
-        self.observacoes = observacoes or None
-        self.status = status
+        self.observacoes = observacoes
+        self.status = 'A'
 
 
     def __repr__(self):
