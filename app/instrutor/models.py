@@ -7,7 +7,7 @@ class Instrutor(db.Model):
     email = db.Column(db.String(120), nullable=False)
     cpf = db.Column(db.String(14), nullable=False)
     telefone = db.Column(db.String(15), nullable=False)
-    data_nascimento = db.Column(db.String(10), nullable=False)
+    data_nascimento = db.Column(db.Date, nullable=False)
     sexo = db.Column(db.String(1), nullable=False)
     faculdade = db.Column(db.String(80), nullable=False)
     confef_cref = db.Column(db.String(20), nullable=False)
@@ -15,8 +15,8 @@ class Instrutor(db.Model):
 
 
     def __init__(
-            self, nome, email, cpf, telefone, data_nascimento,
-            sexo, faculdade, confef_cref, status):
+            self, nome=None, email=None, cpf=None, telefone=None, data_nascimento=None,
+            sexo=None, faculdade=None, confef_cref=None):
         self.nome = nome
         self.email = email
         self.cpf = cpf
@@ -25,7 +25,7 @@ class Instrutor(db.Model):
         self.sexo = sexo
         self.faculdade = faculdade
         self.confef_cref = confef_cref
-        self.status = status
+        self.status = 'A'
 
 
     def __repr__(self):

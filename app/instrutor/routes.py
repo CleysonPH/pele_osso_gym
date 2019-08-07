@@ -2,6 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 
 from app import app, db
 from app.instrutor.models import Instrutor
+from app.instrutor.forms import InstrutorForm
 
 
 @app.route('/listar/instrutor/')
@@ -15,32 +16,22 @@ def listar_instrutores():
     return render_template('instrutor/listar_instrutores.html', titulo=titulo, instrutores=instrutores)
 
 
-@app.route('/cadastar/instrutor/', methods=['GET', 'POST'])
+@app.route('/cadastrar/instrutor/', methods=['GET', 'POST'])
 def cadastrar_instrutor():
     titulo = 'Cadastrar Instrutor'
-    instrutor = None;
+    form = InstrutorForm()
 
-    if request.method == 'GET':
-        return render_template('instrutor/formulario_instrutor.html', titulo=titulo, instrutor=instrutor)
+    if form.validate_on_submit():
+        instrutor = Instrutor()
+        form.populate_obj(instrutor)
 
-    instrutor = Instrutor(
-        nome = request.form.get('nome'),
-        email = request.form.get('email'),
-        cpf = request.form.get('cpf'),
-        telefone = request.form.get('telefone'),
-        data_nascimento = request.form.get('data_nascimento'),
-        sexo = request.form.get('sexo'),
-        faculdade = request.form.get('faculdade'),
-        confef_cref = request.form.get('confef_cref'),
-        status = 'A',
-    )
+        db.session.add(instrutor)
+        db.session.commit()
 
-    db.session.add(instrutor)
-    db.session.commit()
+        flash('Instrutor cadastrado com sucesso!')
 
-    flash('Instrutor cadastrado com sucesso!')
-
-    return redirect(url_for('cadastrar_instrutor'))
+        return redirect(url_for('cadastrar_instrutor'))
+    return render_template('instrutor/formulario_instrutor.html', titulo=titulo, form=form)
 
 
 @app.route('/detalhes/instrutor/<int:id>')
@@ -55,24 +46,17 @@ def detalhar_instrutor(id):
 def editar_instrutor(id):
     titulo = 'Editar Instrutor'
     instrutor = Instrutor.query.get_or_404(id)
+    form = InstrutorForm(obj=instrutor)
 
-    if request.method == 'GET':
-        return render_template('instrutor/formulario_instrutor.html', titulo=titulo, instrutor=instrutor)
+    if form.validate_on_submit():
+        form.populate_obj(instrutor)
 
-    instrutor.nome = request.form.get('nome')
-    instrutor.email = request.form.get('email')
-    instrutor.cpf = request.form.get('cpf')
-    instrutor.telefone = request.form.get('telefone')
-    instrutor.data_nascimento = request.form.get('data_nascimento')
-    instrutor.sexo = request.form.get('sexo')
-    instrutor.faculdade = request.form.get('faculdade')
-    instrutor.confef_cref = request.form.get('confef_cref')
+        db.session.commit()
 
-    db.session.commit()
+        flash('Instrutor editado com sucesso!')
 
-    flash('Instrutor editado com sucesso!')
-
-    return redirect(url_for('detalhar_instrutor', id=instrutor.id))
+        return redirect(url_for('listar_instrutores'))
+    return render_template('instrutor/formulario_instrutor.html', titulo=titulo, form=form)
 
 
 @app.route('/ferias/instrutor/<int:id>/')
