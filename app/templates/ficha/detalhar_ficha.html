@@ -40,11 +40,11 @@
     <div class="row">
         <div class="col-sm-6">
             <h4>Data de Inicio</h4>
-            <p>{{ ficha.data_inicio }}</p>
+            <p>{{ ficha.data_inicio.strftime('%d/%m/%Y') }}</p>
         </div>
         <div class="col-sm-6">
             <h4>Data de Finalização</h4>
-            <p>{{ ficha.data_fim }}</p>
+            <p>{{ ficha.data_fim.strftime('%d/%m/%Y') }}</p>
         </div>
     </div>
 

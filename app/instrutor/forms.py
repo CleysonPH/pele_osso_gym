@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import StringField, DateField, SelectField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Email
 
 
@@ -16,3 +16,11 @@ class InstrutorForm(FlaskForm):
     faculdade = StringField('Faculdade', validators=[DataRequired()])
     confef_cref = StringField('CONFEF | CREF', validators=[DataRequired()])
     submit = SubmitField('Salvar')
+
+    def validate_cpf(form, field):
+        from validate_docbr import CPF
+
+        cpf = CPF()
+
+        if not cpf.validate(field.data):
+            raise ValidationError("CPF Invalido")

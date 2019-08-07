@@ -31,7 +31,6 @@ def cadastrar_aluno():
         flash('Aluno cadastrado com sucesso!')
 
         return redirect(url_for('cadastrar_aluno'))
-    print(form.errors.items())
     return render_template('/aluno/formulario_aluno.html', titulo=titulo, form=form)
 
 
