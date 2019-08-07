@@ -15,7 +15,7 @@ class Ficha(db.Model):
     aluno = db.relationship('Aluno', backref=db.backref('fichas', lazy=True))
 
 
-    def __init__(self, nome, instrutor, aluno, data_inicio, data_fim):
+    def __init__(self, nome=None, instrutor=None, aluno=None, data_inicio=None, data_fim=None):
         self.nome = nome
         self.instrutor = instrutor
         self.aluno = aluno

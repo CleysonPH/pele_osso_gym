@@ -12,6 +12,7 @@ flask-sqlalchemy = "*"
 flask-login = "*"
 flask-wtf = "*"
 validate-docbr = "*"
+wtforms-sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"

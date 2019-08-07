@@ -2,9 +2,7 @@ from flask import request, render_template, flash, redirect, url_for
 
 from app import app, db
 from app.ficha.models import Ficha
-from app.instrutor.models import Instrutor
-from app.aluno.models import Aluno
-from app.utils import get_date_from_string
+from app.ficha.forms import FichaForm
 
 
 @app.route('/listar/fichas/')
@@ -21,33 +19,20 @@ def listar_fichas():
 @app.route('/cadastrar/ficha/', methods=['GET', 'POST'])
 def cadastrar_ficha():
     titulo = 'Cadastrar Ficha'
-    ficha = None
-    instrutores = Instrutor.query.filter(Instrutor.status == 'A')
-    alunos = Aluno.query.filter(Aluno.status == 'A')
+    form = FichaForm()
 
-    if request.method == 'GET':
-        return render_template(
-            'ficha/formulario_ficha.html',
-            titulo=titulo,
-            ficha=ficha,
-            instrutores=instrutores,
-            alunos=alunos
-        )
+    if form.validate_on_submit():
+        ficha = Ficha()
+        form.populate_obj(ficha)
 
-    ficha = Ficha(
-        nome = request.form.get('nome'),
-        instrutor = Instrutor.query.get(request.form.get('instrutor')),
-        aluno = Aluno.query.get(request.form.get('aluno')),
-        data_inicio = get_date_from_string(request.form.get('data_inicio')),
-        data_fim = get_date_from_string(request.form.get('data_fim')),
-    )
+        db.session.add(ficha)
+        db.session.commit()
 
-    db.session.add(ficha)
-    db.session.commit()
+        flash('Ficha cadastrada com sucesso!')    
 
-    flash('Ficha cadastrada com sucesso!')    
-
-    return redirect(url_for('detalhar_ficha', id=ficha.id))
+        return redirect(url_for('detalhar_ficha', id=ficha.id))
+    print(form.errors.items())
+    return render_template('ficha/formulario_ficha.html', titulo=titulo, form=form)
 
 
 @app.route('/detalhar/ficha/<int:id>/')
@@ -60,31 +45,19 @@ def detalhar_ficha(id):
 
 @app.route('/editar/ficha/<int:id>/', methods=['GET', 'POST'])
 def editar_ficha(id):
-    titulo = 'Editar Ficha'
+    titulo = 'Cadastrar Ficha'
     ficha = Ficha.query.get_or_404(id)
-    instrutores = Instrutor.query.filter(Instrutor.status == 'A')
-    alunos = Aluno.query.filter(Aluno.status == 'A')
+    form = FichaForm(obj=ficha)
 
-    if request.method == 'GET':
-        return render_template(
-            'ficha/formulario_ficha.html',
-            titulo=titulo,
-            ficha=ficha,
-            instrutores=instrutores,
-            alunos=alunos
-        )
+    if form.validate_on_submit():
+        form.populate_obj(ficha)
 
-    ficha.nome = request.form.get('nome')
-    ficha.instrutor = Instrutor.query.get(request.form.get('instrutor'))
-    ficha.aluno = Aluno.query.get(request.form.get('aluno'))
-    ficha.data_inicio = get_date_from_string(request.form.get('data_inicio'))
-    ficha.data_fim = get_date_from_string(request.form.get('data_fim'))
+        db.session.commit()
 
-    db.session.commit()
+        flash('Ficha editada com sucesso!')
 
-    flash('Ficha editada com sucesso!')
-
-    return redirect(url_for('listar_fichas'))
+        return redirect(url_for('listar_fichas', id=ficha.id))
+    return render_template('ficha/formulario_ficha.html', titulo=titulo, form=form)
 
 
 @app.route('/conclusao/ficha/<int:id>/')

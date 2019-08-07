@@ -14,56 +14,41 @@
     
     <div class="row">
         <form class="col-sm-12" method="POST">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-                <label for="nameFormControl">Nome da Ficha *</label>
-                <input name="nome" type="text" class="form-control" id="nameFormControl" placeholder="Treino Vem Monstro" required value="{{ ficha.nome or '' }}">
+                {{ form.nome.label }} *
+                {{ form.nome(class='form-control', placeholder='Treino Vem Monstro')}}
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="instrutorFormControlInput">Instrutor *</label>
-                        <select name="instrutor" id="instrutorFormControlInput" class="form-control">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            {% for instrutor in instrutores %}
-                                <option value="{{ instrutor.id }}" {% if ficha and ficha.instrutor.id == instrutor.id %} selected {% endif %} >
-                                    {{ instrutor.nome }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                        {{ form.instrutor.label }} *
+                        {{ form.instrutor(class='form-control')}}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="alunoFormControlInput">Aluno *</label>
-                        <select name="aluno" id="alunoFormControlInput" class="form-control">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            {% for aluno in alunos %}
-                                <option value="{{ aluno.id }}" {% if ficha and ficha.aluno.id == aluno.id %} selected {% endif %}>
-                                    {{ aluno.nome }}
-                                </option>
-                            {% endfor %}
-                            
-                        </select>
+                        {{ form.aluno.label }} *
+                        {{ form.aluno(class='form-control')}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="dataInicioFormControlInput">Data de Inicio *</label>
-                        <input name="data_inicio" type="text" class="form-control" id="dataInicioFormControlInput" placeholder="10/01/2019" required value="{% if ficha%} {{ ficha.data_inicio.strftime('%d/%m/%Y') }} {% endif %}">
+                        {{ form.data_inicio.label }} *
+                        {{ form.data_inicio(class='form-control', placeholder='01/01/2019')}}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="dataFimFormControlInput">Data de Finalização *</label>
-                        <input name="data_fim" type="text" class="form-control" id="dataFimFormControlInput" placeholder="10/02/2019" required value="{% if ficha%} {{ ficha.data_fim.strftime('%d/%m/%Y') }} {% endif %}">
+                        {{ form.data_fim.label }} *
+                        {{ form.data_fim(class='form-control', placeholder='01/02/2019')}}
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
-            <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
+            {{ form.submit(class='btn btn-primary') }}
         </form>
     </div>
 
@@ -74,8 +59,8 @@
     <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}"></script>
 
     <script>
-        $('#dataInicioFormControlInput').mask('00/00/0000')
-        $('#dataFimFormControlInput').mask('00/00/0000')
+        $('#data_inicio').mask('00/00/0000')
+        $('#data_fim').mask('00/00/0000')
 
         $('#limparCampos').click(function() {
             $('input').val('')
