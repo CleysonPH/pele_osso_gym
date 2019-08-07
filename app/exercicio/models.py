@@ -8,10 +8,10 @@ class Exercicio(db.Model):
     status = db.Column(db.String(1), nullable=False)
 
 
-    def __init__(self, nome, descricao, status):
+    def __init__(self, nome=None, descricao=None):
         self.nome = nome
         self.descricao = descricao
-        self.status = status
+        self.status = 'A'
 
 
     def __repr__(self):

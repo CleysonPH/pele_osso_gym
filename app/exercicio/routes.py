@@ -2,6 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 
 from app import app, db
 from app.exercicio.models import Exercicio
+from app.exercicio.forms import ExercicioForm
 
 
 @app.route('/listar/exercicio/')
@@ -18,23 +19,19 @@ def listar_exercicios():
 @app.route('/cadastrar/exercicio/', methods=['GET', 'POST'])
 def cadastrar_exercicio():
     titulo = 'Cadastrar Exercicio'
-    exercicio = None
+    form = ExercicioForm()
 
-    if request.method == 'GET':
-        return render_template('exercicio/formulario_exercicio.html', titulo=titulo, exercicio=exercicio)
+    if form.validate_on_submit():
+        exercicio = Exercicio()
+        form.populate_obj(exercicio)
 
-    exercicio = Exercicio(
-        nome = request.form.get('nome'),
-        descricao = request.form.get('descricao'),
-        status = 'A',
-    )
+        db.session.add(exercicio)
+        db.session.commit()
 
-    db.session.add(exercicio)
-    db.session.commit()
+        flash('Exercicio cadastrado com sucesso!')
 
-    flash('Exercicio cadastrado com sucesso!')
-
-    return redirect(url_for('cadastrar_exercicio'))
+        return redirect(url_for('cadastrar_exercicio'))
+    return render_template('exercicio/formulario_exercicio.html', titulo=titulo, form=form)
 
 
 @app.route('/detalhes/exercicio/<int:id>')
@@ -47,20 +44,19 @@ def detalhar_exercicio(id):
 
 @app.route('/editar/exercicio/<int:id>', methods=['GET', 'POST'])
 def editar_exercicio(id):
-    exercicio = Exercicio.query.get_or_404(id)
     titulo = 'Editar Exercicio'
+    exercicio = Exercicio.query.get_or_404(id)
+    form = ExercicioForm(obj=exercicio)
 
-    if request.method == 'GET':
-        return render_template('exercicio/formulario_exercicio.html', titulo=titulo, exercicio=exercicio)
-    
-    exercicio.nome = request.form.get('nome')
-    exercicio.descricao = request.form.get('descricao')
+    if form.validate_on_submit():
+        form.populate_obj(exercicio)
 
-    db.session.commit()
+        db.session.commit()
 
-    flash('Exercicio editado com sucesso!')
+        flash('Exercicio editado com sucesso!')
 
-    return redirect(url_for('listar_exercicios'))
+        return redirect(url_for('listar_exercicios'))
+    return render_template('exercicio/formulario_exercicio.html', titulo=titulo, form=form)
 
 
 @app.route('/manutencao/exercicio/<int:id>')

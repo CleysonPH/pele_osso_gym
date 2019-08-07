@@ -14,16 +14,17 @@
     
     <div class="row">
         <form class="col-sm-12" method="POST">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-                <label for="nameFormControl">Nome do Exercício *</label>
-                <input name="nome" type="text" class="form-control" id="nameFormControl" placeholder="Cadeira Extensora" required value="{{ exercicio.nome or '' }}">
+                {{ form.nome.label }} *
+                {{ form.nome(class='form-control', placeholder='Cadeira Extensora')}}
             </div>
             <div class="form-group mt-3">
-                <label for="descricaoFormControlTextarea">Descrição *</label>
-                <textarea name="descricao" class="form-control" id="descricaoFormControlTextarea" rows="3" required>{{ exercicio.descricao or '' }}</textarea>
+                {{ form.descricao.label }} *
+                {{ form.descricao(class='form-control')}}
             </div>
     
-            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            {{ form.submit(class='btn btn-primary') }}
             <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
         </form>
     </div>
