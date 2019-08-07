@@ -15,12 +15,12 @@ class Treino(db.Model):
     ficha = db.relationship('Ficha', backref=db.backref('treinos', lazy=True))
 
 
-    def __init__(self, exercicio, carga, repeticao, secao, descanso, ficha):
+    def __init__(self, exercicio=None, carga=None, repeticao=None, secao=None, descanso=None, ficha=None):
         self.exercicio = exercicio
-        self.carga = carga or None
-        self.repeticao = repeticao or None
-        self.secao = secao or None
-        self.descanso = descanso or None
+        self.carga = carga
+        self.repeticao = repeticao
+        self.secao = secao
+        self.descanso = descanso
         self.ficha = ficha
 
 

@@ -14,27 +14,21 @@
     
     <div class="row">
         <form class="col-sm-12" method="POST">
+            {{ form.hidden_tag() }}
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="exercicioFormControlInput">Exercicio *</label>
-                        <select name="exercicio" id="exercicioFormControlInput" class="form-control">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            {% for exercicio in exercicios %}
-                                <option value="{{ exercicio.id }}" {% if treino and treino.exercicio.id == exercicio.id %} selected {% endif %} >
-                                    {{ exercicio.nome }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                        {{ form.exercicio.label }}
+                        {{ form.exercicio(class='form-control') }}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="cargaFormControlInput">Carga</label>
+                        {{ form.carga.label }}
                         <div class="input-group">
-                            <input name="carga" type="number" class="form-control" id="cargaFormControlInput" placeholder="50" step="0.5" required value="{{ treino.carga or '' }}">
+                            {{ form.carga(class='form-control', placeholder='50') }}
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Kg</div>
                             </div>
@@ -44,23 +38,23 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="repeticaoFormControlInput">Repetição</label>
-                        <input name="repeticao" type="number" class="form-control" id="repeticaoFormControlInput" placeholder="15" step="1" required value="{{ treino.repeticao or '' }}">
+                        {{ form.repeticao.label }}
+                        {{ form.repeticao(class='form-control', placeholder='15') }}
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="secaoFormControlInput">Seções</label>
-                        <input name="secao" type="number" class="form-control" id="secaoFormControlInput" placeholder="3" step="1" required value="{{ treino.secao or '' }}">
+                        {{ form.secao.label }}
+                        {{ form.secao(class='form-control', placeholder='3') }}
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="descansoFormControlInput">Descanso</label>
+                        {{ form.descanso.label }}
                         <div class="input-group">
-                            <input name="descanso" type="number" class="form-control" id="descansoFormControlInput" placeholder="45" step="1" required value="{{ treino.descanso or '' }}">
+                            {{ form.descanso(class='form-control', placeholder='45')}}
                             <div class="input-group-prepend">
                                 <div class="input-group-text">seg</div>
                             </div>
@@ -69,7 +63,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar <i class="fas fa-paper-plane"></i></i></button>
+            {{ form.submit(class='btn btn-primary') }}
             <button id="limparCampos" class="btn btn-danger">Limpar Campos <i class="fas fa-brush"></i></button>
         </form>
     </div>
