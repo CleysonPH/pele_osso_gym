@@ -48,11 +48,11 @@
     <div class="row">
         <div class="col-sm-6">
             <h4>Peso</h4>
-            <p>{{ aluno.peso }} Kg</p>
+            <p>{{ aluno.peso or '' }} Kg</p>
         </div>
         <div class="col-sm-6">
             <h4>Altura</h4>
-            <p>{{ aluno.altura }} m</p>
+            <p>{{ aluno.altura or '' }} m</p>
         </div>
     </div>
     <div class="row">
