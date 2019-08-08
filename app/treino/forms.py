@@ -7,7 +7,7 @@ from app.exercicio.models import Exercicio
 
 
 def exercicio_query():
-    return Exercicio.query.filter(Exercicio.status == 'A')
+    return Exercicio.query.filter(Exercicio.status == 'A').order_by(Exercicio.nome)
 
 
 def get_pk(obj):

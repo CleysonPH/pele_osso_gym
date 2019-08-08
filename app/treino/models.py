@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -7,6 +9,7 @@ class Treino(db.Model):
     repeticao = db.Column(db.Integer, nullable=True)
     secao = db.Column(db.Integer, nullable=True)
     descanso = db.Column(db.Integer, nullable=True)
+    data_criacao = db.Column(db.DateTime, nullable=False)
 
     exercicio_id = db.Column(db.Integer, db.ForeignKey('exercicio.id'), nullable=False)
     exercicio = db.relationship('Exercicio', backref=db.backref('treinos', lazy=True))
@@ -22,6 +25,7 @@ class Treino(db.Model):
         self.secao = secao
         self.descanso = descanso
         self.ficha = ficha
+        self.data_criacao = datetime.now()
 
 
     def __repr__(self):

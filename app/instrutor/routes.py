@@ -5,7 +5,7 @@ from app.instrutor.models import Instrutor
 from app.instrutor.forms import InstrutorForm
 
 
-@app.route('/listar/instrutor/')
+@app.route('/listar/instrutores/')
 def listar_instrutores():
     titulo = 'Lista de Instrutores'
 

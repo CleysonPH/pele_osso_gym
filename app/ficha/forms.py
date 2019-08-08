@@ -8,15 +8,15 @@ from app.aluno.models import Aluno
 
 
 def instrutor_query():
-    return Instrutor.query.filter(Instrutor.status == 'A')
+    return Instrutor.query.filter(Instrutor.status == 'A').order_by(Instrutor.nome)
 
 
 def aluno_query():
-    return Aluno.query.filter(Aluno.status == 'A')
+    return Aluno.query.filter(Aluno.status == 'A').order_by(Aluno.nome)
 
 
 def get_pk(obj):
-    return str(obj)
+    return str(obj.id)
 
 
 class FichaForm(FlaskForm):

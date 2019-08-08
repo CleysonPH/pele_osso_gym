@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -7,6 +9,7 @@ class Ficha(db.Model):
     data_inicio = db.Column(db.Date, nullable=False)
     data_fim = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(1), nullable=False)
+    data_criacao = db.Column(db.DateTime, nullable=False)
 
     instrutor_id = db.Column(db.Integer, db.ForeignKey('instrutor.id'), nullable=False)
     instrutor = db.relationship('Instrutor', backref=db.backref('fichas', lazy=True))
@@ -22,6 +25,7 @@ class Ficha(db.Model):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.status = 'A'
+        self.data_criacao = datetime.now()
     
 
     def __repr__(self):

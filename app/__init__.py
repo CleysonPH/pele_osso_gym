@@ -8,6 +8,7 @@ app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
 
+from app.core import routes
 from app.aluno import routes
 from app.aluno import models
 from app.instrutor import routes

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block main_class %}container-fluid{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5><i class="fas fa-graduation-cap"></i></h5>
+                    </div>
+                    <div class="col-sm-10">
+                        <h5>Novos Alunos Cadatrados</h5>
+                        <small>Ultimos 7 dias</small>
+                        <p class="h1">{{ alunos }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5><i class="fas fa-chalkboard-teacher"></i></h5>
+                    </div>
+                    <div class="col-sm-10">
+                        <h5>Novos Instrutores Cadatrados</h5>
+                        <small>Ultimos 7 dias</small>
+                        <p class="h1">{{ instrutores }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5><i class="fas fa-dumbbell"></i></h5>
+                    </div>
+                    <div class="col-sm-10">
+                        <h5>Novos Exercícios Cadatrados</h5>
+                        <small>Ultimos 7 dias</small>
+                        <p class="h1">{{ exercicios }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5><i class="fas fa-clipboard-list"></i></h5>
+                    </div>
+                    <div class="col-sm-10">
+                        <h5>Novas Fichas Cadastradas</h5>
+                        <small>Ultimos 7 dias</small>
+                        <p class="h1">{{ fichas }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div class="jumbotron">
+                <i class="fas fa-graduation-cap h1"></i>
+                <h5>Alunos</h5>
+                <a href="{{ url_for('cadastrar_aluno') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-plus"></i> Cadastrar
+                </a>
+                <a href="{{ url_for('lista_alunos') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-clipboard-list"></i> Listar
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="jumbotron">
+                <i class="fas fa-chalkboard-teacher h1"></i>
+                <h5>Instrutores</h5>
+                <a href="{{ url_for('cadastrar_instrutor') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-plus"></i> Cadastrar
+                </a>
+                <a href="{{ url_for('listar_instrutores') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-clipboard-list"></i> Listar
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="jumbotron">
+                <i class="fas fa-dumbbell h1"></i>
+                <h5>Exercícios</h5>
+                <a href="{{ url_for('cadastrar_exercicio') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-plus"></i> Cadastrar
+                </a>
+                <a href="{{ url_for('listar_exercicios') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-clipboard-list"></i> Listar
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="jumbotron">
+                <i class="fas fa-clipboard-list h1"></i>
+                <h5>Fichas</h5>
+                <a href="{{ url_for('cadastrar_ficha') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-plus"></i> Cadastrar
+                </a>
+                <a href="{{ url_for('listar_fichas') }}" class="btn btn-block btn-primary">
+                    <i class="fas fa-clipboard-list"></i> Listar
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

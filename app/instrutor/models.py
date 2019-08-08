@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -12,6 +14,7 @@ class Instrutor(db.Model):
     faculdade = db.Column(db.String(80), nullable=False)
     confef_cref = db.Column(db.String(20), nullable=False)
     status = db.Column(db.String(1), nullable=False)
+    data_criacao = db.Column(db.DateTime, nullable=False)
 
 
     def __init__(
@@ -26,11 +29,8 @@ class Instrutor(db.Model):
         self.faculdade = faculdade
         self.confef_cref = confef_cref
         self.status = 'A'
+        self.data_criacao = datetime.now()
 
 
     def __repr__(self):
         return f'<Instrutor {self.nome}>'
-
-
-    def __str__(self):
-        return f'{self.id}'

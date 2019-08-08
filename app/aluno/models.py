@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -13,6 +15,7 @@ class Aluno(db.Model):
     sexo = db.Column(db.String(1), nullable=False)
     observacoes = db.Column(db.Text, nullable=True)
     status = db.Column(db.String(1), nullable=False)
+    data_criacao = db.Column(db.DateTime, nullable=False)
 
 
     def __init__(
@@ -28,11 +31,8 @@ class Aluno(db.Model):
         self.sexo = sexo
         self.observacoes = observacoes
         self.status = 'A'
+        self.data_criacao = datetime.now()
 
 
     def __repr__(self):
         return f'<Aluno {self.nome}>'
-
-
-    def __str__(self):
-        return f'{self.id}'
