@@ -1,4 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_required
 
 from app import app, db
 from app.aluno.models import Aluno
@@ -6,6 +7,7 @@ from app.aluno.forms import AlunoForm
 
 
 @app.route('/listar/alunos/')
+@login_required
 def lista_alunos():
     titulo = 'Lista de Alunos'
 
@@ -17,6 +19,7 @@ def lista_alunos():
 
 
 @app.route('/cadastrar/aluno/', methods=['GET', 'POST'])
+@login_required
 def cadastrar_aluno():
     titulo = 'Cadastrar Aluno'
     form = AlunoForm()
@@ -35,6 +38,7 @@ def cadastrar_aluno():
 
 
 @app.route('/detalhes/aluno/<int:id>/')
+@login_required
 def detalhar_aluno(id):
     aluno = Aluno.query.get_or_404(id)
     titulo = 'Detalhes do Aluno'
@@ -43,6 +47,7 @@ def detalhar_aluno(id):
 
 
 @app.route('/editar/aluno/<int:id>/', methods=['GET', 'POST'])
+@login_required
 def editar_aluno(id):
     titulo = 'Editar Aluno'
     aluno = Aluno.query.get_or_404(id)
@@ -60,6 +65,7 @@ def editar_aluno(id):
 
 
 @app.route('/status/aluno/<int:id>')
+@login_required
 def status_aluno(id):
     aluno = Aluno.query.get_or_404(id)
 

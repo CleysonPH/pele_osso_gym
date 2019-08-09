@@ -1,4 +1,5 @@
 from flask import request, render_template, flash, redirect, url_for
+from flask_login import login_required
 
 from app import app, db
 from app.ficha.models import Ficha
@@ -6,6 +7,7 @@ from app.ficha.forms import FichaForm
 
 
 @app.route('/listar/fichas/')
+@login_required
 def listar_fichas():
     titulo = 'Listar Fichas'
 
@@ -17,6 +19,7 @@ def listar_fichas():
 
 
 @app.route('/cadastrar/ficha/', methods=['GET', 'POST'])
+@login_required
 def cadastrar_ficha():
     titulo = 'Cadastrar Ficha'
     form = FichaForm()
@@ -31,11 +34,11 @@ def cadastrar_ficha():
         flash('Ficha cadastrada com sucesso!')    
 
         return redirect(url_for('detalhar_ficha', id=ficha.id))
-    print(form.errors.items())
     return render_template('ficha/formulario_ficha.html', titulo=titulo, form=form)
 
 
 @app.route('/detalhar/ficha/<int:id>/')
+@login_required
 def detalhar_ficha(id):
     ficha = Ficha.query.get_or_404(id)
     titulo = 'Detalhes da Ficha'
@@ -44,6 +47,7 @@ def detalhar_ficha(id):
 
 
 @app.route('/editar/ficha/<int:id>/', methods=['GET', 'POST'])
+@login_required
 def editar_ficha(id):
     titulo = 'Cadastrar Ficha'
     ficha = Ficha.query.get_or_404(id)
@@ -61,6 +65,7 @@ def editar_ficha(id):
 
 
 @app.route('/conclusao/ficha/<int:id>/')
+@login_required
 def conclusao_ficha(id):
     ficha = Ficha.query.get_or_404(id)
 
@@ -80,6 +85,7 @@ def conclusao_ficha(id):
 
 
 @app.route('/suspensao/ficha/<int:id>/')
+@login_required
 def suspensao_ficha(id):
     ficha = Ficha.query.get_or_404(id)
 

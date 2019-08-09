@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-style.css') }}">
+
+    <title>Academia Pele & Osso - {{ titulo }}</title>
+</head>
+
+<body>
+
+    <body class="bg-dark">
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <i class="fas fa-skull"></i> Pele & Osso
+                            </h5>
+                            <form class="form-signin" method="POST">
+                                {{ form.hidden_tag() }}
+                                <div class="form-label-group">
+                                    {{ form.usuario(class='form-control', placeholder='Digite seu nome de usuario') }}
+                                    {{ form.usuario.label }}
+                                </div>
+
+                                <div class="form-label-group">
+                                    {{ form.senha(class='form-control', placeholder='Digite a sua senha') }}
+                                    {{ form.senha.label }}
+                                    <a href="#">Esqueci minha senha</a>
+                                </div>
+                                {{ form.submit(class='btn btn-lg btn-primary btn-block text-uppercase') }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Import JQuery JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <!-- Import Popper Js  -->
+    <script src="{{ url_for('static', filename='js/popper-1.14.7.min.js') }}"></script>
+    <!-- Import Bootstrap Js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

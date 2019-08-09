@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from flask import render_template
+from flask_login import login_required
 
 from app import app
 from app.aluno.models import Aluno
@@ -8,7 +9,15 @@ from app.exercicio.models import Exercicio
 from app.ficha.models import Ficha
 
 
+@app.errorhandler(404)
+def error_404(e):
+    titulo = '404 Página Não Encontrada'
+    
+    return render_template('core/404.html', titulo=titulo), 404
+
+
 @app.route('/')
+@login_required
 def home():
     titulo = 'Home'
 

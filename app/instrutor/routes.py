@@ -1,4 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_required
 
 from app import app, db
 from app.instrutor.models import Instrutor
@@ -6,6 +7,7 @@ from app.instrutor.forms import InstrutorForm
 
 
 @app.route('/listar/instrutores/')
+@login_required
 def listar_instrutores():
     titulo = 'Lista de Instrutores'
 
@@ -17,6 +19,7 @@ def listar_instrutores():
 
 
 @app.route('/cadastrar/instrutor/', methods=['GET', 'POST'])
+@login_required
 def cadastrar_instrutor():
     titulo = 'Cadastrar Instrutor'
     form = InstrutorForm()
@@ -35,6 +38,7 @@ def cadastrar_instrutor():
 
 
 @app.route('/detalhes/instrutor/<int:id>')
+@login_required
 def detalhar_instrutor(id):
     titulo = 'Detalhes do Instrutor'
     instrutor = Instrutor.query.get_or_404(id)
@@ -43,6 +47,7 @@ def detalhar_instrutor(id):
 
 
 @app.route('/editar/instrutor/<int:id>', methods=['GET', 'POST'])
+@login_required
 def editar_instrutor(id):
     titulo = 'Editar Instrutor'
     instrutor = Instrutor.query.get_or_404(id)
@@ -60,6 +65,7 @@ def editar_instrutor(id):
 
 
 @app.route('/ferias/instrutor/<int:id>/')
+@login_required
 def ferias_instrutor(id):
     instrutor = Instrutor.query.get_or_404(id)
 
@@ -78,6 +84,7 @@ def ferias_instrutor(id):
 
 
 @app.route('/rh/instrutor/<int:id>/')
+@login_required
 def rh_instrutor(id):
     instrutor = Instrutor.query.get_or_404(id)
 

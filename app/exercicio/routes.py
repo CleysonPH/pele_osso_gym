@@ -1,4 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_required
 
 from app import app, db
 from app.exercicio.models import Exercicio
@@ -6,6 +7,7 @@ from app.exercicio.forms import ExercicioForm
 
 
 @app.route('/listar/exercicio/')
+@login_required
 def listar_exercicios():
     titulo = 'Lista de Exercicios'
 
@@ -17,6 +19,7 @@ def listar_exercicios():
 
 
 @app.route('/cadastrar/exercicio/', methods=['GET', 'POST'])
+@login_required
 def cadastrar_exercicio():
     titulo = 'Cadastrar Exercicio'
     form = ExercicioForm()
@@ -35,6 +38,7 @@ def cadastrar_exercicio():
 
 
 @app.route('/detalhes/exercicio/<int:id>')
+@login_required
 def detalhar_exercicio(id):
     titulo = 'Detalhes do Exercicio'
     exercicio = Exercicio.query.get_or_404(id)
@@ -43,6 +47,7 @@ def detalhar_exercicio(id):
 
 
 @app.route('/editar/exercicio/<int:id>', methods=['GET', 'POST'])
+@login_required
 def editar_exercicio(id):
     titulo = 'Editar Exercicio'
     exercicio = Exercicio.query.get_or_404(id)
@@ -60,6 +65,7 @@ def editar_exercicio(id):
 
 
 @app.route('/manutencao/exercicio/<int:id>')
+@login_required
 def manutencao_exercicio(id):
     exercicio = Exercicio.query.get_or_404(id)
 
@@ -76,6 +82,7 @@ def manutencao_exercicio(id):
 
 
 @app.route('/controlar/status/exercicio/<int:id>')
+@login_required
 def desativar_reativar_exercicio(id):
     exercicio = Exercicio.query.get_or_404(id)
 

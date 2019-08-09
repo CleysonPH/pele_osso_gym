@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_required
 
 from app import app, db
 from app.treino.models import Treino
@@ -7,6 +8,7 @@ from app.treino.forms import TreinoForm
 
 
 @app.route('/ficha/<int:id>/cadastrar/treino/', methods=['GET', 'POST'])
+@login_required
 def cadastrar_treino(id):
     titulo = 'Cadastrar Treino'
     form = TreinoForm()
@@ -27,6 +29,7 @@ def cadastrar_treino(id):
         
         
 @app.route('/editar/treino/<int:id>/', methods=['GET', 'POST'])
+@login_required
 def editar_treino(id):
     titulo = 'Editar Treino'
     treino = Treino.query.get_or_404(id)
@@ -44,6 +47,7 @@ def editar_treino(id):
 
 
 @app.route('/apagar/treino/<int:id>')
+@login_required
 def apagar_treino(id):
     treino = Treino.query.get_or_404(id)
     ficha_id = treino.ficha.id
