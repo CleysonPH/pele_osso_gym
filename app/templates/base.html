@@ -94,12 +94,12 @@
                             <div class="container m-1 text-center">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <img src="https://via.placeholder.com/500x500" alt="" class="img-fluid rounded-circle img-thumbnail">
+                                        <img src="{{ current_user.img_url }}" alt="" class="img-fluid rounded-circle img-thumbnail">
                                     </div>
                                 </div>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ url_for('alterar_dados') }}">
                                 <i class="fas fa-user-circle"></i> Conta
                             </a>
                             <a class="dropdown-item" href="{{ url_for('alterar_senha') }}">

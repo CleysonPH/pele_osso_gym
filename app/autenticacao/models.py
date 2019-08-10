@@ -12,6 +12,7 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(120), nullable=False)
+    img_url = db.Column(db.Text, nullable=False, default='https://via.placeholder.com/500x500')
     cpf = db.Column(db.String(14), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     telefone = db.Column(db.String(15), nullable=False)
@@ -19,13 +20,14 @@ class User(db.Model, UserMixin):
     senha_hash = db.Column(db.String(128))
 
 
-    def __init__(self, nome, cpf, email, telefone, usuario, senha):
+    def __init__(self, nome, cpf, email, telefone, usuario, senha, img_url=None):
         self.nome = nome
         self.cpf = cpf
         self.email = email
         self.telefone = telefone
         self.usuario = usuario
         self.senha_hash = generate_password_hash(senha)
+        self.img_url = img_url
 
 
     def __repr__(self):

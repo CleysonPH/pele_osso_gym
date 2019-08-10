@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 
 from app import app, db
-from app.autenticacao.forms import LoginForm, AlterarSenhaForm
+from app.autenticacao.forms import LoginForm, AlterarSenhaForm, AlterarDadosForm
 from app.autenticacao.models import User
 
 
@@ -48,6 +48,23 @@ def alterar_senha():
         flash('Senha atual incorreta')
         return redirect(url_for('alterar_senha'))
     return render_template('autenticacao/alterar_senha.html', titulo=titulo, form=form)
+
+
+@app.route('/alterar/dados/', methods=['GET', 'POST'])
+def alterar_dados():
+    usuario = current_user
+    titulo = 'Atualizar Dados'
+    form = AlterarDadosForm(obj=usuario)
+
+    if form.validate_on_submit():
+        form.populate_obj(usuario)
+
+        db.session.commit()
+
+        flash('Dados atualizados com sucesso!')
+
+        return redirect(url_for('alterar_dados'))
+    return render_template('autenticacao/alterar_dados.html', titulo=titulo, form=form)
 
 
 @app.route('/logout/')
