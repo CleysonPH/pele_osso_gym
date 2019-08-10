@@ -71,4 +71,58 @@
             </p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Fichas de Treino</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col sm-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Status</th>
+                            <th>Nome</th>
+                            <th>Aluno</th>
+                            <th>Data Inicio</th>
+                            <th>Data Fim</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ficha in instrutor.fichas %}
+                            <tr>
+                                <td>{{ ficha.id }}</td>
+                                <td>
+                                    {% if ficha.status == 'C' %}
+                                        <span class="badge badge-success">Concluida</span>
+                                    {% elif ficha.status == 'A' %}
+                                        <span class="badge badge-warning">Ativa</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">Suspensa</span>
+                                    {% endif %}  
+                                </td>
+                                <td>{{ ficha.nome }}</td>
+                                <td>{{ ficha.aluno.nome }}</td>
+                                <td>{{ ficha.data_inicio.strftime('%d/%m/%Y') }}</td>
+                                <td>{{ ficha.data_fim.strftime('%d/%m/%Y') }}</td>
+                                <td>
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        <button onclick="window.location='{{ url_for("detalhar_ficha", id=ficha.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                            title="Detalhes"><i class="fas fa-clipboard-list"></i></button>
+                                        <button onclick="window.location='{{ url_for("editar_ficha", id=ficha.id) }}';" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                            title="Editar"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

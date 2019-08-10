@@ -29,7 +29,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         {{ form.telefone.label }} *
-                        {{ form.telefone(class='form-control', id='telefone_input', placeholder='(86) 9 9531-1354')}}
+                        {{ form.telefone(class='form-control', id='telefone_input', placeholder='(86) 99531-1354')}}
                     </div>
                 </div>
             </div>
@@ -38,6 +38,10 @@
                     <div class="form-group">
                         {{ form.cpf.label }} *
                         {{ form.cpf(class='form-control', id='cpf_input', placeholder='030.272.861-76')}}
+                        {% for error in form.cpf.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                        
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -90,7 +94,7 @@
 
     <script>
         $('#cpf_input').mask('000.000.000-00', {reverse: true})
-        $('#telefone_input').mask('(00) 0 0000-0000')
+        $('#telefone_input').mask('(00) 00000-0000')
         $('#data_nascimento_input').mask('00/00/0000')
 
         $('#limparCampos').click(function() {

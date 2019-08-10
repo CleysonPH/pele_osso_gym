@@ -34,3 +34,10 @@ class User(db.Model, UserMixin):
 
     def verificar_senha(self, senha):
         return check_password_hash(self.senha_hash, senha)
+
+
+    def alterar_senha(self, senha_atual, senha_nova):
+        if self.verificar_senha(senha_atual):
+            self.senha_hash = generate_password_hash(senha_nova)
+            return True
+        return False
