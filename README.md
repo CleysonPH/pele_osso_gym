@@ -39,13 +39,17 @@ Inicie o ambiente virtual
 pipenv shell
 ```
 
-Depois crie o banco de dados
+Depois crie o banco de dados e um usuario para acessar o sistema
 
 ```sh
 python
 
->>> form model import db
+>>> form app import db
 >>> db.create_all()
+>>> from app.autenticacao.models import User
+>>> user = User(nome="nome do usuario", cpf="cpf do usuario", email="email do usuario", telefone="telefone do usuario", usuario="username do usuario", senha="senha do usuario")
+>>> db.session.add(user)
+>>> db.session.commit()
 ```
 
 E por ultimo basta executar o servidor de desenvolvimento do Flask
