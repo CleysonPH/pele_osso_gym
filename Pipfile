@@ -13,6 +13,7 @@ flask-login = "*"
 flask-wtf = "*"
 validate-docbr = "*"
 wtforms-sqlalchemy = "*"
+flask-weasyprint = "*"
 
 [requires]
 python_version = "3.6"

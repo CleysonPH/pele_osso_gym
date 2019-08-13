@@ -8,7 +8,9 @@
 
     <div class="row">
         <div class="col-sm-12 border-bottom mt-2 mb-4">
-            <h1>{{ titulo }}</h1>
+            <h1>
+                {{ titulo }}
+            </h1>
         </div>
     </div>
 
@@ -57,8 +59,9 @@
             <h2>
                 Treinos
                 {% if ficha.status == 'A' %}
-                    <a class="btn btn-outline-primary ml-1" href="{{ url_for('cadastrar_treino', id=ficha.id) }}" role="button">Adicionar Treio</a>
+                    <a class="btn btn-outline-primary ml-1" href="{{ url_for('cadastrar_treino', id=ficha.id) }}" role="button">Adicionar Treino</a>
                 {% endif %}
+                <a class="btn btn-outline-primary ml-1" href="{{ url_for('imprimir_ficha', id=ficha.id) }}" target="_blank">Imprimir Ficha</a>
             </h2>
         </div>
     </div>

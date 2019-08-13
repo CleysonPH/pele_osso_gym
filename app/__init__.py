@@ -25,3 +25,4 @@ from app.treino import models
 from app.treino import routes
 from app.autenticacao import models
 from app.autenticacao import routes
+from app.relatorios import routes

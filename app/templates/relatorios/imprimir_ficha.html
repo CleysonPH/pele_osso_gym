@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <title>{{ titulo }}</title>
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>{{ titulo }}</h1>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Instrutor:</strong>
+                    {{ ficha.instrutor.nome }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    <strong>Aluno:</strong>
+                    {{ ficha.aluno.nome }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    <strong>Data de Inicio:</strong>
+                    {{ ficha.data_inicio.strftime('%d/%m/%Y') }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    <strong>Data de Finalização</strong>
+                    {{ ficha.data_fim.strftime('%d/%m/%Y') }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive nowrap">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Exercicio</th>
+                                <th>Carga</th>
+                                <th>Repetição</th>
+                                <th>Seções</th>
+                                <th>Descanso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for treino in ficha.treinos %}
+                                <tr>
+                                    <td>{{ treino.exercicio.nome }}</td>
+                                    <td>{{ treino.carga }} Kg</td>
+                                    <td>{{ treino.repeticao }}</td>
+                                    <td>{{ treino.secao }}</td>
+                                    <td>{{ treino.descanso }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                Gerado por: {{ current_user.nome }}
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Import JQuery JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <!-- Import Popper Js  -->
+    <script src="{{ url_for('static', filename='js/popper-1.14.7.min.js') }}"></script>
+    <!-- Import Bootstrap Js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
