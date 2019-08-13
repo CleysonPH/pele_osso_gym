@@ -17,7 +17,8 @@ def login():
         if user is None:
             flash('Nome de Usuario incorreto')
         elif user.verificar_senha(form.senha.data):
-            login_user(user)
+            lembrar = form.lembrar.data
+            login_user(user, remember=lembrar)
             flash('Login realizado com sucesso!')
 
             next = request.args.get('next')

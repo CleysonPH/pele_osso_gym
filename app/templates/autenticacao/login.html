@@ -50,7 +50,13 @@
                                     {{ form.senha(class='form-control', placeholder='Digite a sua senha') }}
                                     {{ form.senha.label }}
                                 </div>
-                                {{ form.submit(class='btn btn-lg btn-primary btn-block text-uppercase') }}
+
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.lembrar(class='custom-control-input') }}
+                                    {{ form.lembrar.label(class="custom-control-label") }}
+                                </div>
+
+                                {{ form.submit(class='btn btn-lg btn-primary btn-block text-uppercase mt-2') }}
                             </form>
                         </div>
                     </div>
